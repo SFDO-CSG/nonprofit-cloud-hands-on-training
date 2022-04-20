@@ -1,0 +1,80 @@
+minimum_cumulusci_version: '3.54.0'
+project:
+    name: nonprofit-cloud-hands-on-training
+    package:
+        name: nonprofit-cloud-hands-on-training
+        api_version: '52.0'
+    dependencies:
+        - github: 'https://github.com/SalesforceFoundation/NPSP'
+        - github: 'https://github.com/SalesforceFoundation/PMM'
+    git:
+        default_branch: 'main'
+    source_format: sfdx
+
+sources:
+    npsp:
+        github: https://github.com/SalesforceFoundation/NPSP
+    pmm:
+        github: https://github.com/SalesforceFoundation/PMM
+
+tasks:
+
+    robot:
+        options:
+            suites: robot/nonprofit-cloud-hands-on-training/tests
+            options:
+                outputdir: robot/nonprofit-cloud-hands-on-training/results
+
+    robot_testdoc:
+        options:
+            path: robot/nonprofit-cloud-hands-on-training/tests
+            output: robot/nonprofit-cloud-hands-on-training/doc/nonprofit-cloud-hands-on-training_tests.html
+
+    run_tests:
+        options:
+            required_org_code_coverage_percent: 75
+
+flows:
+    config_scratch:
+        steps:
+            1:
+                task: npsp:update_dependencies
+            2:
+                task: npsp:deploy
+                options:
+                    path: unpackaged/pre/account_record_types
+                ui_options:
+                    name: Account Record Types
+            3:
+                task: npsp:ensure_record_type
+            4:
+                task: npsp:install_managed
+            5:
+                task: npsp:deploy_trial_config
+            6:
+                task: npsp:test_data_relationships
+            7:
+                task: npsp:deploy_reports
+            8:
+                task: npsp:update_admin_profile
+            9:
+                task: pmm:install_managed
+            10:
+                task: pmm:deploy_dev_config
+            11:
+                task: pmm:update_admin_profile
+            12:
+                task: pmm:deploy_customer_profiles
+            13:
+                task: pmm:deploy_post
+            14:
+                 task: load_dataset
+
+plans:
+    new_org:
+        slug: nonprofit-cloud-hands-on-training
+        title: Install NPSP and PMM for nonprofit and general workshops
+
+        steps:
+            1:
+                flow: config_scratch
