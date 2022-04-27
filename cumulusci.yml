@@ -8,6 +8,7 @@ project:
         - github: 'https://github.com/SalesforceFoundation/NPSP'
         - github: 'https://github.com/SalesforceFoundation/PMM'
     git:
+        repo_url: https://github.com/SFDO-CSG/nonprofit-cloud-hands-on-training
         default_branch: 'main'
     source_format: sfdx
 
