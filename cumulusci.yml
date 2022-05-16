@@ -75,6 +75,10 @@ plans:
     new_org:
         slug: nonprofit-cloud-hands-on-training
         title: Install NPSP and PMM for nonprofit and general workshops
+        tier: primary
+        is_listed: True
+        preflight_message: "This will generate a scratch org pre-configured for hands-on training."
+        post_install_message: "Thanks for learning with us!"
 
         steps:
             1:
