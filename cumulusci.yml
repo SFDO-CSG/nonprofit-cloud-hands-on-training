@@ -79,7 +79,6 @@ plans:
         is_listed: True
         preflight_message: "This will generate a scratch org pre-configured for hands-on training."
         post_install_message: "Thanks for learning with us!"
-
         steps:
             1:
                 flow: config_scratch
