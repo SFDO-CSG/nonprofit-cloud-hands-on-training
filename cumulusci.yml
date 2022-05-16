@@ -72,7 +72,7 @@ flows:
                  task: load_dataset
 
 plans:
-    new_org:
+    install:
         slug: nonprofit-cloud-hands-on-training
         title: Install NPSP and PMM for nonprofit and general workshops
         tier: primary
